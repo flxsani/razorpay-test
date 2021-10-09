@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "b07eda82-fef2-4241-ae82-f9d1e5218696",
+		"name": "Razorpay-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Payment Link",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"amount\": 1000,\n  \"currency\": \"INR\",\n  \"accept_partial\": false,\n  \"first_min_partial_amount\": 0,\n  \"expire_by\": 1691097057,\n  \"reference_id\": \"TSsd125\",\n  \"description\": \"Payment for policy no #23456\",\n  \"customer\": {\n    \"name\": \"Sani Yadav\",\n    \"contact\": \"+918299759269\",\n    \"email\": \"sani@antino.io\"\n  },\n  \"notify\": {\n    \"sms\": true,\n    \"email\": true\n  },\n  \"reminder_enable\": true,\n  \"notes\": {\n    \"policy_name\": \"Jeevan Bima\"\n  },\n  \"callback_url\": \"http://localhost:4200/payment/webhooK/payment-link/\",\n  \"callback_method\": \"get\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4200/payment/create-payment-link",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"payment",
+						"create-payment-link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Webhook for Payment Link Response",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/payment/webhooK/payment-link?razorpay_payment_id=pay_I7GRAw46k5TQ8H&razorpay_payment_link_id=plink_I7GPLIX4Te6lKA&razorpay_payment_link_reference_id=TSsd125&razorpay_payment_link_status=paid&razorpay_signature=5e9b932a9d79b1b0c037fc586bf0657e7ce0c377773815454ad81d4908c5edb5",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"payment",
+						"webhooK",
+						"payment-link"
+					],
+					"query": [
+						{
+							"key": "razorpay_payment_id",
+							"value": "pay_I7GRAw46k5TQ8H"
+						},
+						{
+							"key": "razorpay_payment_link_id",
+							"value": "plink_I7GPLIX4Te6lKA"
+						},
+						{
+							"key": "razorpay_payment_link_reference_id",
+							"value": "TSsd125"
+						},
+						{
+							"key": "razorpay_payment_link_status",
+							"value": "paid"
+						},
+						{
+							"key": "razorpay_signature",
+							"value": "5e9b932a9d79b1b0c037fc586bf0657e7ce0c377773815454ad81d4908c5edb5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1000,\n    \"currency\": \"INR\",\n    \"internalRefNo\": \"REF1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4200/payment/create-order",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"payment",
+						"create-order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

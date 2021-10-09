@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RazorPay Example</title>
+
+    <script>
+        function CreateOrder() {
+            let amount = document.getElementById('payment-amount').value;
+            console.log("Amount::", amount);
+            let payload = {
+                amount:amount,
+                currency:'INR',
+                internalRefNo:'REF1233'
+            }
+
+            let url = "http://localhost:4200/payment/create-order";
+            const xhr = new XMLHttpRequest();
+            let that = this;
+
+            //XHR Request complete
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && (this.status == 200 || this.status == 201)) {
+                    console.log("Response:", this.responseText);
+
+                }
+                else {
+                    //Errors can be handled here.
+                    console.log("Error Response::", this.responseText);
+
+                }
+
+            };
+
+            // XHR - Make Request  
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(payload);
+
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        Amount: <input type="text" name="amount" id="payment-amount" />
+        <input type="button" value="Initiate Payment" onclick="CreateOrder()" />
+    </div>
+</body>
+
+</html>
